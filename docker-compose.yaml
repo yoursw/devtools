@@ -1,0 +1,13 @@
+---
+services:
+  drupal-dev:
+    build: 
+      context: .
+      dockerfile: dev.Dockerfile
+    # command: sleep 10000
+    # working_dir: /home/dev/$PROJECT_NAME
+    command: ddev start
+    volumes:
+      - ./:/home/dev
+      - /var/run/docker.sock:/var/run/docker.sock
+...
