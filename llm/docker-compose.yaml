@@ -1,0 +1,44 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    volumes:
+      - open-webui:/app/backend/data
+    restart: always
+    environment:
+      - OPENAI_API_KEY=$OPENAI_API_KEY
+      - OPENAI_API_BASE_URL=$OPENAI_API_BASE_URL
+    ports:
+      - 3000:8080
+
+  # ollama:
+  #   volumes:
+  #     - ollama:/root/.ollama
+  #   container_name: ollama
+  #   pull_policy: always
+  #   tty: true
+  #   restart: unless-stopped
+  #   image: ollama/ollama:latest
+  #   environment:
+  #     - 'OLLAMA_NUM_PARALLEL=1'
+
+  # open-webui-lucie:
+  #   image: ghcr.io/openllm-france/open-webui-lucie:latest
+  #   container_name: open-webui-lucie
+  #   volumes:
+  #     - open-webui:/app/backend/data
+  #   depends_on:
+  #     - ollama
+  #   ports:
+  #     - 3000:8080
+  #   environment:
+  #     - 'OLLAMA_BASE_URL=http://ollama:11434'
+  #     - 'WEBUI_SECRET_KEY='
+  #     - 'WEBUI_AUTH=false'
+  #   extra_hosts:
+  #     - host.docker.internal:host-gateway
+  #   restart: unless-stopped
+
+volumes:
+  # ollama: {}
+  open-webui: {}
+
